@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion Designing Studio</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ffe6f0, #fff0f5);
+    transition: 0.4s;
+}
+
+/* DARK MODE */
+.dark {
+    background: #222;
+    color: white;
+}
+
+/* HEADER */
+header {
+    background-color: #ff4d94;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* NAVIGATION */
+nav {
+    background-color: #ff99cc;
+    text-align: center;
+    padding: 10px;
+}
+
+nav button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+nav button:hover,
+nav button.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+/* PAGE */
+.page {
+    display: none;
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* IMAGES */
+img {
+    border-radius: 10px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+img:hover {
+    transform: scale(1.1);
+}
+
+/* FORM */
+input, textarea {
+    padding: 8px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button.submit-btn {
+    background-color: #ff4d94;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button.submit-btn:hover {
+    background-color: #e60073;
+}
+
+/* FOOTER */
+footer {
+    background-color: #ff4d94;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    img {
+        width: 90%;
+    }
+}
+</style>
+
+<script>
+function showPage(pageId, btn) {
+    var pages = document.getElementsByClassName("page");
+    var buttons = document.querySelectorAll("nav button");
+
+    for (var i = 0; i < pages.length; i++) {
+        pages[i].style.display = "none";
+    }
+
+    buttons.forEach(b => b.classList.remove("active"));
+    if(btn) btn.classList.add("active");
+
+    document.getElementById(pageId).style.display = "block";
+}
+
+function validateForm() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+
+    if (name == "") {
+        alert("Please enter your name");
+        return false;
+    }
+
+    if (email == "" || !email.includes("@")) {
+        alert("Please enter valid email");
+        return false;
+    }
+
+    alert("Message Sent Successfully!");
+    return true;
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+
+/* IMAGE SLIDER */
+var images = ["dress1.jpg","dress2.jpg","dress3.jpg"];
+var i = 0;
+
+function changeImage() {
+    i++;
+    if (i >= images.length) {
+        i = 0;
+    }
+    document.getElementById("slider").src = images[i];
+}
+
+window.onload = function() {
+    showPage("home", document.querySelector("nav button"));
+    setInterval(changeImage, 2000);
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    <h1>🌸 Fashion Designing Studio 🌸</h1>
+    <p>Style | Elegance | Creativity</p>
+    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+</header>
+
+<nav>
+    <button onclick="showPage('home', this)">Home</button>
+    <button onclick="showPage('about', this)">About</button>
+    <button onclick="showPage('gallery', this)">Gallery</button>
+    <button onclick="showPage('pricing', this)">Pricing</button>
+    <button onclick="showPage('reviews', this)">Reviews</button>
+    <button onclick="showPage('contact', this)">Contact</button>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page">
+    <h2>Welcome to Our Fashion World</h2>
+    <p>We design modern and traditional dresses for all occasions.</p>
+
+    <h3>Special Offer 🎉</h3>
+    <p>20% Discount on Bridal Collections this month!</p>
+
+    <img id="slider" src="dress1.jpg" width="250">
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+    <h2>About Our Studio</h2>
+    <p>Established in 2024, we specialize in Bridal Wear, Sarees, Kurtis, Lehengas, and Western Outfits.</p>
+
+    <ul style="list-style-type:square; display:inline-block; text-align:left;">
+        <li>Custom Dress Designing</li>
+        <li>Bridal Collections</li>
+        <li>Fashion Consultation</li>
+        <li>Online Orders</li>
+    </ul>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery" class="page">
+    <h2>Our Collections</h2>
+    <img src="dress1.jpg" width="200">
+    <img src="dress2.jpg" width="200">
+    <img src="dress3.jpg" width="200">
+</div>
+
+<!-- PRICING -->
+<div id="pricing" class="page">
+    <h2>Our Pricing</h2>
+    <p>Bridal Wear: ₹25,000 – ₹1,50,000</p>
+    <p>Lehengas: ₹10,000 – ₹80,000</p>
+    <p>Custom Kurtis: ₹2,000 – ₹10,000</p>
+</div>
+
+<!-- REVIEWS -->
+<div id="reviews" class="page">
+    <h2>Customer Reviews</h2>
+    <p>⭐⭐⭐⭐⭐ "Amazing bridal collection!" – Meera</p>
+    <p>⭐⭐⭐⭐⭐ "Perfect fitting and design." – Aisha</p>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="page">
+    <h2>Contact Us</h2>
+
+    <form onsubmit="return validateForm()">
+        <label>Name:</label><br>
+        <input type="text" id="name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" id="email"><br><br>
+
+        <label>Phone:</label><br>
+        <input type="number"><br><br>
+
+        <label>Message:</label><br>
+        <textarea rows="4"></textarea><br><br>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+</div>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/919999999999" target="_blank" 
+style="position:fixed;bottom:20px;right:20px;
+background:#25D366;color:white;padding:15px;
+border-radius:50%;text-decoration:none;font-size:20px;">
+💬
+</a>
+
+<footer>
+    © 2026 Fashion Designing Studio <br><br>
+    Follow Us: Instagram | Facebook | WhatsApp
+</footer>
+
+</body>
+</html>
