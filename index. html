@@ -149,7 +149,7 @@ function toggleDarkMode() {
 }
 
 /* IMAGE SLIDER */
-var images = ["a.jpg.png","b.jpg.png","c.jpg.png"];
+var images = ["a.png","b.png","c.png"];
 var i = 0;
 
 function changeImage() {
@@ -192,7 +192,7 @@ window.onload = function() {
     <h3>Special Offer 🎉</h3>
     <p>20% Discount on Bridal Collections this month!</p>
 
-    <img id="slider" src="d.jpg.png" width="250">
+    <img id="slider" src="d..png" width="250">
 </div>
 
 <!-- ABOUT -->
@@ -211,9 +211,9 @@ window.onload = function() {
 <!-- GALLERY -->
 <div id="gallery" class="page">
     <h2>Our Collections</h2>
-    <img src="a.jpg.png" width="200">
-    <img src="b.jpg.png" width="200">
-    <img src="c.jpg.png" width="200">
+    <img src="a.png" width="200">
+    <img src="b.png" width="200">
+    <img src="c.png" width="200">
 </div>
 
 <!-- PRICING -->
