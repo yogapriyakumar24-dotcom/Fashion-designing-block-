@@ -3,266 +3,374 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fashion Designing Studio</title>
+<title>Luxury Fashion Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ffe6f0, #fff0f5);
-    transition: 0.4s;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:linear-gradient(rgba(255,255,255,0.9),rgba(255,255,255,0.9)),
+url('background.jpg') center/cover fixed;
+color:#333;
+overflow-x:hidden;
 }
 
-/* DARK MODE */
-.dark {
-    background: #222;
-    color: white;
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* HEADER */
-header {
-    background-color: #ff4d94;
-    color: white;
-    text-align: center;
-    padding: 20px;
+nav ul{
+list-style:none;
+display:flex;
+gap:20px;
+align-items:center;
 }
 
-/* NAVIGATION */
-nav {
-    background-color: #ff99cc;
-    text-align: center;
-    padding: 10px;
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:600;
+cursor:pointer;
 }
 
-nav button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    font-weight: bold;
+.cart-icon{
+background:#ff4d94;
+color:white;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+position:relative;
 }
 
-nav button:hover,
-nav button.active {
-    color: white;
-    border-bottom: 2px solid white;
+.cart-count{
+position:absolute;
+top:-5px;
+right:-8px;
+background:red;
+color:white;
+font-size:12px;
+padding:2px 6px;
+border-radius:50%;
 }
 
 /* PAGE */
-.page {
-    display: none;
-    padding: 30px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-in;
+.page{
+display:none;
+padding:120px 40px;
+min-height:100vh;
+text-align:center;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.active{display:block;}
+
+/* HERO */
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+url("https://images.unsplash.com/photo-1572120360610-d971b9d7767c") center/cover;
+color:white;
 }
 
-/* IMAGES */
-img {
-    border-radius: 10px;
-    margin: 10px;
-    transition: 0.3s;
+/* BUTTON */
+.btn{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+background:#ff4d94;
+color:white;
+cursor:pointer;
+margin-top:10px;
 }
 
-img:hover {
-    transform: scale(1.1);
+/* SHOP */
+.shop{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.image-wrapper{
+aspect-ratio:3/4;
+overflow:hidden;
+border-radius:15px;
+}
+
+.image-wrapper img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* CART OVERLAY */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+z-index:1500;
+}
+
+.overlay.active{
+display:block;
+}
+
+/* CART PANEL */
+.cart-panel{
+position:fixed;
+top:0;
+right:-400px;
+width:350px;
+height:100vh;
+background:white;
+box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+padding:20px;
+transition:0.4s;
+overflow-y:auto;
+z-index:2000;
+}
+
+.cart-panel.active{
+right:0;
+}
+
+.cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.close-cart{
+cursor:pointer;
+font-size:20px;
+font-weight:bold;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+border-bottom:1px solid #ddd;
+padding-bottom:5px;
+}
+
+.total{
+font-weight:bold;
+margin-top:20px;
 }
 
 /* FORM */
-input, textarea {
-    padding: 8px;
-    width: 250px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button.submit-btn {
-    background-color: #ff4d94;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-button.submit-btn:hover {
-    background-color: #e60073;
+input,select,textarea{
+width:100%;
+padding:8px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 /* FOOTER */
-footer {
-    background-color: #ff4d94;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 20px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-    img {
-        width: 90%;
-    }
+footer{
+background:#ff4d94;
+color:white;
+padding:20px;
+text-align:center;
 }
 </style>
 
 <script>
-function showPage(pageId, btn) {
-    var pages = document.getElementsByClassName("page");
-    var buttons = document.querySelectorAll("nav button");
+let cart=[];
+let total=0;
 
-    for (var i = 0; i < pages.length; i++) {
-        pages[i].style.display = "none";
-    }
-
-    buttons.forEach(b => b.classList.remove("active"));
-    if(btn) btn.classList.add("active");
-
-    document.getElementById(pageId).style.display = "block";
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
 }
 
-function validateForm() {
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-
-    if (name == "") {
-        alert("Please enter your name");
-        return false;
-    }
-
-    if (email == "" || !email.includes("@")) {
-        alert("Please enter valid email");
-        return false;
-    }
-
-    alert("Message Sent Successfully!");
-    return true;
+function addToCart(name,price){
+cart.push({name,price});
+total+=price;
+updateCart();
+alert(name+" added to cart 🛍");
 }
 
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
+function updateCart(){
+let cartItems=document.getElementById("cartItems");
+cartItems.innerHTML="";
+cart.forEach((item,index)=>{
+cartItems.innerHTML+=`
+<div class="cart-item">
+<span>${item.name}</span>
+<span>₹${item.price}</span>
+<button onclick="removeItem(${index})">❌</button>
+</div>`;
+});
+document.getElementById("totalAmount").innerText="₹"+total;
+document.getElementById("cartCount").innerText=cart.length;
 }
 
-/* IMAGE SLIDER */
-var images = ["a.png","b.png","c.png"];
-var i = 0;
-
-function changeImage() {
-    i++;
-    if (i >= images.length) {
-        i = 0;
-    }
-    document.getElementById("slider").src = images[i];
+function removeItem(index){
+total-=cart[index].price;
+cart.splice(index,1);
+updateCart();
 }
 
-window.onload = function() {
-    showPage("home", document.querySelector("nav button"));
-    setInterval(changeImage, 2000);
+function toggleCart(){
+document.getElementById("cartPanel").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
+}
+
+function checkout(){
+if(cart.length===0){
+alert("Cart is empty!");
+return;
+}
+alert("Proceeding to payment 💳 (Demo)");
+cart=[];
+total=0;
+updateCart();
+toggleCart();
+}
+
+function bookNow(){
+alert("Appointment Booked Successfully 💕");
+return false;
 }
 </script>
+
 </head>
 
 <body>
 
-<header>
-    <h1>🌸 Fashion Designing Studio 🌸</h1>
-    <p>Style | Elegance | Creativity</p>
-    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-</header>
-
 <nav>
-    <button onclick="showPage('home', this)">Home</button>
-    <button onclick="showPage('about', this)">About</button>
-    <button onclick="showPage('gallery', this)">Gallery</button>
-    <button onclick="showPage('pricing', this)">Pricing</button>
-    <button onclick="showPage('reviews', this)">Reviews</button>
-    <button onclick="showPage('contact', this)">Contact</button>
+<h2>Fashion Studio</h2>
+<ul>
+<li><a onclick="showPage('home')">Home</a></li>
+<li><a onclick="showPage('shop')">Shop</a></li>
+<li><a onclick="showPage('booking')">Booking</a></li>
+<li><a onclick="showPage('contact')">Contact</a></li>
+<li>
+<div class="cart-icon" onclick="toggleCart()">
+Cart 🛒
+<span id="cartCount" class="cart-count">0</span>
+</div>
+</li>
+</ul>
 </nav>
 
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+<!-- CART PANEL -->
+<div id="cartPanel" class="cart-panel">
+<div class="cart-header">
+<h2>Your Cart</h2>
+<span class="close-cart" onclick="toggleCart()">❌</span>
+</div>
+<div id="cartItems"></div>
+<p class="total">Total: <span id="totalAmount">₹0</span></p>
+<button class="btn" onclick="checkout()">Checkout</button>
+</div>
+
 <!-- HOME -->
-<div id="home" class="page">
-    <h2>Welcome to Our Fashion World</h2>
-    <p>We design modern and traditional dresses for all occasions.</p>
-
-    <h3>Special Offer 🎉</h3>
-    <p>20% Discount on Bridal Collections this month!</p>
-
-    <img id="slider" src="d..png" width="250">
+<div id="home" class="page active">
+<div class="hero">
+<h1>Luxury Fashion Designing Studio</h1>
+<p>Where Elegance Meets Perfection</p>
+<button class="btn" onclick="showPage('shop')">Explore Collection</button>
+</div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="page">
-    <h2>About Our Studio</h2>
-    <p>Established in 2024, we specialize in Bridal Wear, Sarees, Kurtis, Lehengas, and Western Outfits.</p>
+<!-- SHOP -->
+<div id="shop" class="page">
+<h2>Our Premium Collection</h2>
+<div class="shop">
 
-    <ul style="list-style-type:square; display:inline-block; text-align:left;">
-        <li>Custom Dress Designing</li>
-        <li>Bridal Collections</li>
-        <li>Fashion Consultation</li>
-        <li>Online Orders</li>
-    </ul>
+<script>
+const products=[
+["Bridal Lehenga",85000,"dress1.jpg"],
+["Designer Saree",25000,"dress2.jpg"],
+["Modern Gown",40000,"dress3.jpg"],
+["Reception Gown",55000,"dress4.jpg"],
+["Silk Saree",30000,"dress5.jpg"],
+["Engagement Lehenga",70000,"dress6.jpg"],
+["Party Wear Gown",35000,"dress7.jpg"],
+["Half Saree",28000,"dress8.jpg"],
+["Designer Anarkali",32000,"dress9.jpg"]
+];
+
+products.forEach(p=>{
+document.write(`
+<div class="card">
+<div class="image-wrapper"><img src="${p[2]}"></div>
+<h3>${p[0]}</h3>
+<p>₹${p[1]}</p>
+<button class="btn" onclick="addToCart('${p[0]}',${p[1]})">Add to Cart</button>
+</div>
+`);
+});
+</script>
+
+</div>
 </div>
 
-<!-- GALLERY -->
-<div id="gallery" class="page">
-    <h2>Our Collections</h2>
-    <img src="a.png" width="200">
-    <img src="b.png" width="200">
-    <img src="c.png" width="200">
-</div>
-
-<!-- PRICING -->
-<div id="pricing" class="page">
-    <h2>Our Pricing</h2>
-    <p>Bridal Wear: ₹25,000 – ₹1,50,000</p>
-    <p>Lehengas: ₹10,000 – ₹80,000</p>
-    <p>Custom Kurtis: ₹2,000 – ₹10,000</p>
-</div>
-
-<!-- REVIEWS -->
-<div id="reviews" class="page">
-    <h2>Customer Reviews</h2>
-    <p>⭐⭐⭐⭐⭐ "Amazing bridal collection!" – Meera</p>
-    <p>⭐⭐⭐⭐⭐ "Perfect fitting and design." – Aisha</p>
+<!-- BOOKING -->
+<div id="booking" class="page">
+<h2>Book Appointment</h2>
+<form onsubmit="return bookNow()">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email" required>
+<input type="date" required>
+<select required>
+<option value="">Select Service</option>
+<option>Bridal Consultation</option>
+<option>Custom Design</option>
+<option>Alteration</option>
+</select>
+<textarea rows="4" placeholder="Additional Notes"></textarea>
+<br><br>
+<button class="btn" type="submit">Book Now</button>
+</form>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="page">
-    <h2>Contact Us</h2>
-
-    <form onsubmit="return validateForm()">
-        <label>Name:</label><br>
-        <input type="text" id="name"><br><br>
-
-        <label>Email:</label><br>
-        <input type="email" id="email"><br><br>
-
-        <label>Phone:</label><br>
-        <input type="number"><br><br>
-
-        <label>Message:</label><br>
-        <textarea rows="4"></textarea><br><br>
-
-        <button type="submit" class="submit-btn">Send Message</button>
-    </form>
+<h2>Contact Us</h2>
+<p>Email: fashionstudio@email.com</p>
+<p>Phone: +91 99999 99999</p>
+<p>Location: Chennai, India</p>
 </div>
 
-<!-- WHATSAPP BUTTON -->
-<a href="https://wa.me/919999999999" target="_blank" 
-style="position:fixed;bottom:20px;right:20px;
-background:#25D366;color:white;padding:15px;
-border-radius:50%;text-decoration:none;font-size:20px;">
-💬
-</a>
-
 <footer>
-    © 2026 Fashion Designing Studio <br><br>
-    Follow Us: Instagram | Facebook | WhatsApp
+© 2026 Luxury Fashion Studio | Designed By Priya
 </footer>
 
 </body>
